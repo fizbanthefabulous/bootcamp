@@ -1,0 +1,57 @@
+*{
+    padding: 20px;
+    margin: 3px;
+    background-color: white;
+}
+
+h1{
+    background-color: #b3b3b3;
+    border: 1px solid black;
+}
+
+.wrapper{
+    width: 100%;
+}
+
+.main-content{
+    background-color: #cccccc;
+    border: 1px solid black;
+}
+
+.optional{
+    background-color: #feff9a;
+    border: 1px solid black;
+}
+
+@media only screen and (max-width: 480px){
+    .sm-0 {
+        display: none;
+    }
+
+    .sm-1 {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 481px){
+    .med-0 {
+        display: none;
+    }
+
+    .med-1 {
+        display: block;
+    }
+}
+
+@media only screen and (min-width: 1024px){
+    .lrg-0{
+        display: none;
+    }
+
+    .lrg-1 {
+        display: block;
+    }
+}
+
+
+
