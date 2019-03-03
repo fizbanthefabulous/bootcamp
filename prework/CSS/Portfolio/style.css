@@ -1,0 +1,176 @@
+*{
+   /* outline: 1px solid red;*/
+    margin: 0px;
+    padding: 0px;
+}
+
+html{
+    outline: none;
+}
+
+body{
+    outline: none;
+}
+
+.wrapper{
+    width: 1000px;
+    height: 1300px;
+    background-color: white;
+    margin: 0px auto;
+}
+
+#header{
+    min-height: 75px;
+    line-height: 75px;
+    background-color: #f9f9f9;
+}
+
+#header div{
+    width: 475px;
+    display: inline-block;
+    padding: 0px 10px;
+}
+
+#tagline{
+    vertical-align: top;
+    text-align: right;
+}
+
+#footer{
+    min-height: 75px;
+    color: #f9f9f9;
+}
+
+.content-wrapper{
+    min-height: 1150px;
+    background-image: radial-gradient(#6e5863,#1b0b0e)
+}
+
+#picture{
+    margin: 20px 10px 20px 20px;
+    height: 285px;
+    width: 445px;
+    display: inline-block;
+    padding: 7.5px;
+    background-color: #c0c0c0;
+}
+
+#picture img{
+    height: 285px;
+    width: 445px;
+}
+
+#description{
+    margin: 20px 20px 20px 10px;
+    height: 300px;
+    width: 460px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.subheading{
+    min-height: 40px;
+    background-image: linear-gradient(to bottom,#b3b3b6,#888594,#b3b3b6);
+    line-height: 40px;
+    padding: 10px;
+}
+
+.subheading h2{
+    color: white;
+}
+
+#description .content{
+    height: 240px;
+}
+
+.content{
+    background-image: linear-gradient(to bottom right, #ffffff,#dbccda);
+}
+
+.content p{
+    padding: 10px;
+}
+
+#moreAbout{
+    color: black;
+}
+
+.projects{
+    min-height: 735px;
+    width: 300px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.pic img{
+    width: 300px;
+    height: 200px;
+}
+
+.techContent{
+    height: 225px;
+    background-image: linear-gradient(to bottom right, #ffffff,#dbccda);
+}
+
+#qualifications .content{
+    height: 250px;
+}
+
+.icon{
+    width: 45px;
+    height: 45px;
+    padding: 5px;
+    display: inline-block;
+}
+
+.appLink{
+    background-color: #407d61;
+    padding: 5px;
+    border-radius: 15px;
+    margin: 30px 100px;
+    text-align: center;
+    border: 1px solid black;
+}
+
+.appLink#famCont{
+    margin: 30px 75px;
+}
+
+.appLink a{
+    text-decoration: none;
+    color: white;
+}
+
+#laMode{
+    margin: 0px 10px 10px 20px;
+}
+
+#familyContacts{
+    margin: 0px 10px 10px 10px;
+}
+
+#fiveEleven{
+    margin: 0px 20px 10px 10px;
+}
+
+.contact{
+    text-align: center;
+    line-height: 37.5px;
+}
+
+#email p{
+    color: black;
+}
+
+#contactOther a{
+    color: black;
+    margin: 5px;
+    vertical-align: middle;
+}
+
+#contactOther img{
+    width: 20px;
+    height: 20px;
+    margin: 5px;
+    vertical-align: middle;
+}
