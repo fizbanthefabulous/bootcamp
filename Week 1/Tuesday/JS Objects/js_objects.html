@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+
+            //Exercise 1
+            console.log(`Exercise 1`);
+            let students = [
+                {name: 'Remy', cohort: 'Jan'},
+                {name: 'Genevieve', cohort: 'March'},
+                {name: 'Chuck', cohort: 'Jan'},
+                {name: 'Osmund', cohort: 'June'},
+                {name: 'Nikki', cohort: 'June'},
+                {name: 'Boris', cohort: 'June'}
+            ];
+        
+
+            function printStudentList(studentList)
+            {
+                for(let i = 0; i < studentList.length; ++i)
+                {
+                    let student = studentList[i];
+                    let name, cohort;
+                    for(let attribute in student)
+                    {
+                        if(attribute === "name")
+                        {
+                            name = student[attribute];
+                        }
+                        else if(attribute === "cohort")
+                        {
+                            cohort = student[attribute];
+                        }
+                    }
+                    console.log(`Name: ${name}, Cohort: ${cohort}`);
+                }
+            }
+
+            printStudentList(students);
+
+
+            //Exercise 2
+            console.log(`******************************************************`);
+            console.log(`Exercise 2`);
+
+            let users = {
+                employees: [
+                    {'first_name':  'Miguel', 'last_name' : 'Jones'},
+                    {'first_name' : 'Ernie', 'last_name' : 'Bertson'},
+                    {'first_name' : 'Nora', 'last_name' : 'Lu'},
+                    {'first_name' : 'Sally', 'last_name' : 'Barkyoumb'}
+                ],
+                managers: [
+                    {'first_name' : 'Lillian', 'last_name' : 'Chambers'},
+                    {'first_name' : 'Gordon', 'last_name' : 'Poe'}
+                ]
+            };
+
+            function printUserList(users)
+            {
+                let firstName, lastName, userGroup, ug, letterCount, user;
+                
+                //Traverse the user groups in collection of all users -- Object
+                for(let userGroup in users)
+                {
+                    console.log(userGroup.toUpperCase());
+                    ug = users[userGroup];
+
+                    //Traverse the users in a user group -- Array
+                    for(let userCount = 0; userCount < ug.length; ++userCount)
+                    {
+                        letterCount = 0;
+                        user = ug[userCount];
+
+                        //Traverse attributes of user -- Object
+                        for(let attribute in user)
+                        {
+                            if(attribute === "first_name")
+                            {
+                                firstName = user[attribute];
+                                letterCount += firstName.length;
+                            }
+                            else if(attribute === "last_name")
+                            {
+                                lastName = user[attribute];
+                                letterCount += lastName.length;
+                            }
+                        }
+                        console.log(`${userCount + 1} - ${lastName}, ${firstName} - ${letterCount}`);
+                    }
+                }
+            }
+
+            printUserList(users);
+
+        </script>
+    </body>
+</html>
