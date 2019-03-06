@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+</head>
+
+<body>
+
+    <div id='target'>
+    </div>
+    <script>
+        var theStaticPart;
+        for (var i = 1; i <= 6; i++) {
+            theStaticPart = `<img src=https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/${i}.png>`;
+            document.getElementById('target').innerHTML += theStaticPart;
+        }
+    </script>
+</body>
+
+</html>

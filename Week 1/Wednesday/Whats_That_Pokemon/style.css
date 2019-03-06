@@ -1,0 +1,23 @@
+.wrapper{
+    width: 100%;
+    height: 1500px;
+}
+
+#pokemon_characters{
+    width: 65%;
+    vertical-align: top;
+    display: inline-block;
+}
+
+#character_details{
+    width: 30%;
+    height: 50%;
+    display: inline-block;
+    border: 10px solid red;
+    padding: 10px;
+}
+
+img{
+    width: 96px;
+    height: 96px;
+}
