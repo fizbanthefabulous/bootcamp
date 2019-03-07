@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <title>Weather Search</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="input">
+                <input type="text" placeholder="City" id="searchCity">
+                <input type="button" id="search" value="Search Weather">
+            </div>
+
+            <div class="display">
+                <h1 id="city"></h1>
+                <h4 id="temperature"></h4>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var apiKey = `&&appid=817e81467f2d9202427c385cd95e4376&&units=imperial`;
+            var weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=`;
+
+            // $(`#search`).click(function (){
+            //         var city = $(`#searchCity`).val();
+
+            //         console.log(city);
+
+            //         $.get(`${weatherURL}${city}${apiKey}`,
+            //             function(res){
+            //                 console.log(res);
+            //             },
+            //             "json"               
+            //         );
+            //     }
+            // );
+
+            $(`#search`).click(function(){searchWeather();});
+
+            function searchWeather(){
+                var city = $(`#searchCity`).val();
+
+                console.log(city);
+
+                $.get(`${weatherURL}${city}${apiKey}`,
+                    function(res){
+                        console.log(res);
+                        $(`#city`).html(res.name);
+                        $(`#temperature`).html(`Temperature: ` + Math.floor(res.main.temp));
+                    },
+                    "json"               
+                );
+            }
+
+        </script>
+    </body>
+</html>
