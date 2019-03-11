@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="node_modules/react/umd/react.development.js"></script>
+        <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+        <title>Ticking Clock</title>
+    </head>
+    <body>
+        <div id="app">
+
+        </div>
+
+        <script>
+
+            function updateCurrentTime() {
+                var today = new Date();
+                
+                //Javascript
+                // document.getElementById("app").innerHTML = `<h1>The time is: ${today.toLocaleTimeString()}</h1>`;
+
+                //React
+                const Clock = React.createElement("h1", null, `The time is: ${today.toLocaleTimeString()}`);
+
+                ReactDOM.render( Clock, document.getElementById("app"));
+            }
+
+            setInterval(updateCurrentTime, 1000);
+        </script>
+    </body>
+</html>
