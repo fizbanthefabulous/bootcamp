@@ -17,22 +17,22 @@
 
 <script>
     const Square = (props) => {
-       const { text } = props; 
-       const { style } = props;
-       console.log(style);
-       console.log(text);
-       return React.createElement('h1', props, text);
-}
+        const { text } = props;
+        const { style } = props;
+        console.log(style);
+        console.log(text);
+        return React.createElement('h1', props, text);
+    }
 
-const App = (props) => {
-    return React.createElement('div', null,
-    
-    React.createElement(Square, {style: { backgroundColor: 'blue', width: '29%', float:'left', content: "", display: 'block', paddingBottom:'29%', color:'white' }, text: 'white on blue'}  ),
-    React.createElement(Square, {style: { backgroundColor: 'red',  width: '29%', float:'left', content: "", display: 'block', paddingBottom:'29%', color:'blue' }, text: 'blue on red'} ),
-    React.createElement(Square, {style: { backgroundColor: 'pink', width: '29%', float:'left', content: "", display: 'block', paddingBottom:'29%', color:'green' }, text: 'green on pink'}  )
-  
-)
-}   
+    const App = (props) => {
+        return React.createElement('div', null,
+
+            React.createElement(Square, { style: { backgroundColor: 'blue', width: '29%', float: 'left', content: "", display: 'block', paddingBottom: '29%', color: 'white' }, text: 'white on blue' }),
+            React.createElement(Square, { style: { backgroundColor: 'red', width: '29%', float: 'left', content: "", display: 'block', paddingBottom: '29%', color: 'blue' }, text: 'blue on red' }),
+            React.createElement(Square, { style: { backgroundColor: 'pink', width: '29%', float: 'left', content: "", display: 'block', paddingBottom: '29%', color: 'green' }, text: 'green on pink' })
+
+        )
+    }
     ReactDOM.render(App(), document.getElementById('app'));
 </script>
 

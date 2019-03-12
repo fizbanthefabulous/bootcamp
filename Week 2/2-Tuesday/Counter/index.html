@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="node_modules/react/umd/react.development.js"></script>
+        <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <title>Counter</title>
+    </head>
+
+    <body>
+        <div id="appContainer"></div>
+    </body>
+
+    <script type="text/babel">
+        class Counter extends React.Component{
+            constructor(props){
+                super(props);
+
+            }
+        }
+
+        class App extends React.Component {
+            constructor(props){
+                super(props);
+                this.state = {
+                    text: props.text,
+                }
+            }
+
+            render() {
+                return (
+                    <div id="app">
+                        <h1>{this.state.text}</h1>
+                        <button
+                            onClick={ () => this.setState({ text: 'State has changed!' }) } >
+                            Click to change state's text value!
+                        </button>
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<App text="Starting text"/>, document.getElementById('appContainer'));
+    </script>
+</html>
