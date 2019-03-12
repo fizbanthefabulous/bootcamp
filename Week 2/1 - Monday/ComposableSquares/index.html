@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <title>Composable Squares</title>
+</head>
+
+<body>
+    <div id="app"></div>
+    </div>
+</body>
+
+<script>
+    const Square = (props) => {
+       const { text } = props; 
+       const { style } = props;
+       console.log(style);
+       console.log(text);
+       return React.createElement('h1', props, text);
+}
+
+const App = (props) => {
+    return React.createElement('div', null,
+    
+    React.createElement(Square, {style: { backgroundColor: 'blue', width: '29%', float:'left', content: "", display: 'block', paddingBottom:'29%', color:'white' }, text: 'white on blue'}  ),
+    React.createElement(Square, {style: { backgroundColor: 'red',  width: '29%', float:'left', content: "", display: 'block', paddingBottom:'29%', color:'blue' }, text: 'blue on red'} ),
+    React.createElement(Square, {style: { backgroundColor: 'pink', width: '29%', float:'left', content: "", display: 'block', paddingBottom:'29%', color:'green' }, text: 'green on pink'}  )
+  
+)
+}   
+    ReactDOM.render(App(), document.getElementById('app'));
+</script>
+
+</html>
