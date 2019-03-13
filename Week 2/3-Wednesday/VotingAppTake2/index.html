@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+<script type="text/babel">
+    
+    // const voteChoices = ['React','Vue','Angular','Ember'];
+    // const options = (voteChoices) => voteChoices.map((item, idx) => <li>{item}</li>);
+    
+    // const App = <div> {PageTitle()} </div>;
+
+    const listStyle = {
+        border: '1px solid black',
+        height: '50px',
+        width: '200px',
+        textAlign: 'center',
+        lineHeight: '50px',
+    }
+
+    const incrementCount = (item) => {
+        console.log('Increment');
+        console.log(item);
+        item.count++;
+        ReactDOM.render(<List items= { ballot } />, document.getElementById('app'));
+    }
+
+
+    const List = (props) => {
+        const sortedList = props.items.sort((a,b) => {
+            console.log(b.count - a.count);
+            return b.count - a.count;
+        })
+
+        console.log(sortedList);
+
+        const listItems = props.items.map((itemString) => {
+            return <li key={itemString.name} style={listStyle} onClick={ () => incrementCount(itemString) } >{itemString.count}------{itemString.name}</li>
+        });
+        return (
+            <div>
+                 <h1> Vote Your JS Library! </h1>
+                  <ul style={{listStyleType: 'none'}}>
+                  {listItems}
+                 </ul>
+            </div>
+        )
+    }
+
+    
+    const ballot = [{name:'React', count:2},{name:'Vue', count:10},{name:'Angular', count:0},{name:'Ember', count:0}]
+    
+    ReactDOM.render(<List items= { ballot } />, document.getElementById('app'));
+
+    //console.log ((options(voteChoices)));
+    //ReactDOM.render(App,document.getElementById("app"));
+</script>
+
+</html>

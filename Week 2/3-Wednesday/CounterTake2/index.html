@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="node_modules/react/umd/react.development.js"></script>
+        <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+        <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Counter Take 2</title>
+    </head>
+    <body>
+        <div id="content"></div>
+    </body>
+
+    <script type="text/babel">
+        
+
+
+        //App Class has a state
+        class App extends React.Component {
+            constructor(props) {
+                super(props);
+
+                this.state = {
+                    counters: [0]
+                }
+            }
+
+            //Add a new counter to our array of counters
+            addCounter = () => {
+                this.setState({
+                    counters: [...this.state.counters, 0]
+                })
+            }
+
+            //Decrements the count value for given index in counters
+            decrementCounter = (idx) => {
+                this.state.counters[idx]--;
+                this.setState({
+                    counters: this.state.counters
+                })
+            }
+
+            //Increments the count value for given index in counters
+            incrementCounter = (idx) => {
+                this.state.counters[idx]++;
+                this.setState({
+                    counters: this.state.counters
+                })
+            }
+
+            
+            render() {
+
+                //Renders a Counter object on the DOM
+                const Counter = (props) => {
+                    return (
+                        <div id={props.idx} className="counter">
+                            <span>{props.counter}</span>
+                            <button onClick={ () => props.decFunc(props.idx) }>Decrement</button>
+                            <button onClick={ () => props.incFunc(props.idx) }>Increment</button>
+                        </div>
+                    )
+                }
+
+                //Create a Counter object for each counter in our counter array
+                const counters = this.state.counters.map( (counter, idx) => {
+                    return <Counter key={idx} counter={counter} idx={idx} decFunc={this.decrementCounter} incFunc={this.incrementCounter}/> 
+                })
+
+                //Renders the App
+                return (
+                    <div>
+                        <button onClick={ () => this.addCounter() }>Add Counter</button>
+                        {counters}
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<App/>, document.getElementById('content'));
+    </script>
+</html>
