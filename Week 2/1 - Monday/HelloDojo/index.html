@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <title>Hello Dojo</title>
+</head>
+<body>
+    <div id="content"></div>
+</body>
+
+<script>
+    
+    const Option1 = React.createElement('li', {id:'op1'}, "Learn React");
+    const Option2 = React.createElement('li', {id:'op2'}, "Climb Mt. Everest");
+    const Option3 = React.createElement('li', {id:'op3'}, "Run a marathon");
+    const Option4 = React.createElement('li', {id:'op4'}, "Feed the dogs");
+    const List = React.createElement('ul', null, Option1, Option2, Option3, Option4);
+    const PageSubTitle = React.createElement('h3', null, "Things I need to do:");
+    const PageTitle = React.createElement('h1', null, "Hello Dojo!");
+    const App = React.createElement('div', {id:'app'}, PageTitle, PageSubTitle, List);
+
+    ReactDOM.render(App, document.getElementById(`content`));
+</script>
+</html>

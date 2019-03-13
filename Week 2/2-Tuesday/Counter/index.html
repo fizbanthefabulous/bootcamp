@@ -8,6 +8,7 @@
         <script src="node_modules/react/umd/react.development.js"></script>
         <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
         <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <title>Counter</title>
     </head>
 
@@ -16,34 +17,96 @@
     </body>
 
     <script type="text/babel">
+
+        //Counter class
         class Counter extends React.Component{
             constructor(props){
                 super(props);
-
+                this.counter = props.counter;
+                this.idx = props.idx;
+                this.incrementFunc = props.inc;
+                this.decrementFunc = props.dec;
+                console.log(`Constructing Counter ${this.idx}`)
             }
-        }
 
-        class App extends React.Component {
-            constructor(props){
-                super(props);
-                this.state = {
-                    text: props.text,
-                }
+            increment = () => {
+                console.log("Increment!");
+                this.counter++;
+                this.incrementFunc(this.idx);
+            }
+
+            decrement = () => {
+                console.log("decrement!");
+                this.counter--;
+                this.decrementFunc(this.idx);
             }
 
             render() {
+                //console.log(this);
+                console.log(`Rendering Counter ${this.idx}`)
                 return (
-                    <div id="app">
-                        <h1>{this.state.text}</h1>
-                        <button
-                            onClick={ () => this.setState({ text: 'State has changed!' }) } >
-                            Click to change state's text value!
-                        </button>
+                    <div className="counter">
+                        <span>{this.counter}</span>
+                        <button onClick={ ()=> { this.decrement() } }>Decrement</button>
+                        <button onClick={ ()=> { this.increment() } }>Increment</button>
                     </div>
                 )
             }
         }
 
-        ReactDOM.render(<App text="Starting text"/>, document.getElementById('appContainer'));
+        //App class
+        class App extends React.Component {
+            constructor(props){
+                console.log("Constructing!");
+                super(props);
+                //let firstCounter = new Counter({counter:0, idx:0});
+                this.state = {
+                    counters: [0]
+                }
+                //console.log(this);
+            }
+
+            addCounter = () => {
+                //let newCounter = new Counter({counter:0, idx:this.state.counters.length});
+                this.setState({
+                    counters: [...this.state.counters, 0]
+                })
+                console.log(this);
+            }
+
+            incrementCounter = (idx) => {
+                console.log(`Incrementing ${idx}`);
+                this.state.counters[idx]++;
+                let newCounters = this.state.counters;
+                this.setState({
+                    counters: newCounters
+                })
+            }
+
+            decrementCounter = (idx) => {
+                console.log(`Decrementing ${idx}`);
+                this.state.counters[idx]--;
+                let newCounters = this.state.counters;
+                this.setState({
+                    counters: newCounters
+                })
+            }
+
+            render() {
+                console.log(this);
+                let counters = this.state.counters.map((item, idx) => <Counter key={idx} counter={item} idx={idx} inc={this.incrementCounter} dec={this.decrementCounter} />);
+
+                console.log("Rendering App!");
+                return (
+                    <div id="app">
+                       <button id="buttonCounter" onClick={ ()=>{ this.addCounter() } }>Add Counter</button>
+                       {counters}
+                    </div>
+                )
+            }
+        }
+
+        ReactDOM.render(<App/>, document.getElementById('appContainer'));
+
     </script>
 </html>
