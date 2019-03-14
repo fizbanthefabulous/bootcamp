@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <div id="appWrapper"></div>
+</body>
+
+<script type="text/babel">
+
+    const Square = (props) => {
+        return (
+            <div className={'square '+props.value} rowidx={props.rowidx} colidx={props.colidx} onClick={() => props.updateFunction(props.rowidx, props.colidx)}>
+                <span>{props.value}</span>
+            </div>
+        )
+    }
+
+
+    const Row = (props) => {
+        const squares = props.row.map((square, colidx) => <Square rowidx={props.rowidx} colidx={colidx} key={'square'+colidx} value={square} updateFunction={props.updateFunction} />)
+
+        return (
+            <div className="row">
+                {squares}
+            </div>
+        )
+    }
+
+
+    const Board = (props) => {
+        const rows = props.board.map((row, rowidx) => <Row row={row} rowidx={rowidx} key={'row'+rowidx} updateFunction={props.updateFunction}/>)
+
+        return (
+            <div id="board">
+                {rows}
+            </div>
+        )
+    };
+
+
+
+    class App extends React.Component {
+        constructor(props) {
+            super(props);
+
+            this.state = {
+                board: [["","",""],["","",""],["","",""]],
+                currentTurn: "X",
+                gameOver: false,
+                moves: 0
+            }
+        }
+
+
+        //Updates the board with a selection
+        updateBoard = (rowidx, colidx) => {
+            console.log(`Updating board for row:${rowidx} column:${colidx}`);
+            var theBoard = this.state.board;
+            var whosTurn = this.state.currentTurn;
+            
+            if(!this.state.gameOver) {
+                if(theBoard[rowidx][colidx] === "") {
+                    console.log("Square is empty");
+                    theBoard[rowidx][colidx] = whosTurn;
+                    if(whosTurn === "X") {
+                        whosTurn = "O";
+                    }
+                    else {
+                        whosTurn = "X";
+                    }
+
+                    this.setState({
+                        board: theBoard,
+                        currentTurn: whosTurn
+                    });
+
+                    setTimeout(this.isThereAWinner, 20);
+                }
+                else {
+                    alert(`That space has already been used. Please choose again!`);
+                }
+            }
+        }
+
+
+        //Determines if someone has won the game
+        isThereAWinner = () => {
+            var theBoard = this.state.board;
+
+            if((theBoard[0][0] === theBoard[0][1] && theBoard[0][1] === theBoard[0][2] && theBoard[0][2] != "") ||      //Check top row
+                (theBoard[1][0] === theBoard[1][1] && theBoard[1][1] === theBoard[1][2] && theBoard[1][2] != "") ||     //Check middle row
+                (theBoard[2][0] === theBoard[2][1] && theBoard[2][1] === theBoard[2][2] && theBoard[2][2] != "") ||     //Check bottom row
+                (theBoard[0][0] === theBoard[1][0] && theBoard[1][0] === theBoard[2][0] && theBoard[2][0] != "") ||     //Check left column
+                (theBoard[0][1] === theBoard[1][1] && theBoard[1][1] === theBoard[2][1] && theBoard[2][1] != "") ||     //Check middle column
+                (theBoard[0][2] === theBoard[1][2] && theBoard[1][2] === theBoard[2][2]) && theBoard[2][2] != "" ||     //Check right column
+                (theBoard[0][0] === theBoard[1][1] && theBoard[1][1] === theBoard[2][2] && theBoard[2][2] != "") ||     //Check diagonal down
+                (theBoard[0][2] === theBoard[1][1] && theBoard[1][1] === theBoard[2][0] && theBoard[2][0] != "")        //Check diagonal up
+            ) {
+                let winner = "";
+
+                if(this.state.currentTurn === "X") {
+                    winner = "O";
+                }
+                else {
+                    winner = "X";
+                }
+                alert(`${winner} is the Winner!`);
+            }
+        }
+
+
+        //Resets the game
+        resetGame = () => {
+            this.setState({
+                board: [["","",""],["","",""],["","",""]],
+                currentTurn: "X",
+                moves: 0,
+                gameOver: false
+            });
+        }
+
+
+        //Renders app to the DOM
+        render() {
+            return (
+                <div id="app">
+                    <h1>TicTacToe</h1>
+                    <h3>Current Turn: {this.state.currentTurn}</h3>
+                    <div id="controls">
+                        <button onClick={() => this.resetGame()}>Reset Game</button>
+                    </div>
+                    <Board board={this.state.board} updateFunction={this.updateBoard}/>
+                </div>
+            )
+        }
+    }
+
+    ReactDOM.render(<App/>, document.getElementById('appWrapper'));
+</script>
+</html>
