@@ -97,7 +97,7 @@
 
                     //Check if anyone has won or if it is a tie
                     theWinner = this.isThereAWinner();
-                    if(theWinner != "" && theMoves === 9) {
+                    if(theWinner === "" && theMoves === 9) {
                         gameDone = true;
                         theWinner = "Tie Game";
                     }
