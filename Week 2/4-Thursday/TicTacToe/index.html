@@ -16,6 +16,7 @@
 
 <script type="text/babel">
 
+    //Stateless square component
     const Square = (props) => {
         return (
             <div className={'square '+props.value} rowidx={props.rowidx} colidx={props.colidx} onClick={() => props.updateFunction(props.rowidx, props.colidx)}>
@@ -25,6 +26,7 @@
     }
 
 
+    //Stateless row component
     const Row = (props) => {
         const squares = props.row.map((square, colidx) => <Square rowidx={props.rowidx} colidx={colidx} key={'square'+colidx} value={square} updateFunction={props.updateFunction} />)
 
@@ -36,6 +38,7 @@
     }
 
 
+    //Stateless board component
     const Board = (props) => {
         const rows = props.board.map((row, rowidx) => <Row row={row} rowidx={rowidx} key={'row'+rowidx} updateFunction={props.updateFunction}/>)
 
@@ -47,7 +50,7 @@
     };
 
 
-
+    //Our stateful App component
     class App extends React.Component {
         constructor(props) {
             super(props);
@@ -56,7 +59,8 @@
                 board: [["","",""],["","",""],["","",""]],
                 currentTurn: "X",
                 gameOver: false,
-                moves: 0
+                moves: 0,
+                winner: ""
             }
         }
 
@@ -66,11 +70,24 @@
             console.log(`Updating board for row:${rowidx} column:${colidx}`);
             var theBoard = this.state.board;
             var whosTurn = this.state.currentTurn;
+            var theWinner = "";
+            var theMoves = this.state.moves;
+            var gameDone = this.state.gameOver;
             
-            if(!this.state.gameOver) {
+            //Check that game hasn't ended due to a winner or tie
+            if(!gameDone) {
+                
+                //Check that clicked square is available
                 if(theBoard[rowidx][colidx] === "") {
                     console.log("Square is empty");
+
+                    //Increment moves
+                    theMoves += 1;
+
+                    //Set the ownership of the square
                     theBoard[rowidx][colidx] = whosTurn;
+
+                    //Flip whose turn it is
                     if(whosTurn === "X") {
                         whosTurn = "O";
                     }
@@ -78,12 +95,25 @@
                         whosTurn = "X";
                     }
 
+                    //Check if anyone has won or if it is a tie
+                    theWinner = this.isThereAWinner();
+                    if(theWinner != "" && theMoves === 9) {
+                        gameDone = true;
+                        theWinner = "Tie Game";
+                    }
+                    else if(theWinner != "") {
+                        gameDone = true;
+                        theWinner += " is the winner!";
+                    }
+
+                    //Update app state
                     this.setState({
                         board: theBoard,
-                        currentTurn: whosTurn
+                        currentTurn: whosTurn,
+                        moves: theMoves,
+                        gameOver: gameDone,
+                        winner: theWinner
                     });
-
-                    setTimeout(this.isThereAWinner, 20);
                 }
                 else {
                     alert(`That space has already been used. Please choose again!`);
@@ -95,6 +125,7 @@
         //Determines if someone has won the game
         isThereAWinner = () => {
             var theBoard = this.state.board;
+            let winner = "";
 
             if((theBoard[0][0] === theBoard[0][1] && theBoard[0][1] === theBoard[0][2] && theBoard[0][2] != "") ||      //Check top row
                 (theBoard[1][0] === theBoard[1][1] && theBoard[1][1] === theBoard[1][2] && theBoard[1][2] != "") ||     //Check middle row
@@ -105,16 +136,10 @@
                 (theBoard[0][0] === theBoard[1][1] && theBoard[1][1] === theBoard[2][2] && theBoard[2][2] != "") ||     //Check diagonal down
                 (theBoard[0][2] === theBoard[1][1] && theBoard[1][1] === theBoard[2][0] && theBoard[2][0] != "")        //Check diagonal up
             ) {
-                let winner = "";
-
-                if(this.state.currentTurn === "X") {
-                    winner = "O";
-                }
-                else {
-                    winner = "X";
-                }
-                alert(`${winner} is the Winner!`);
+               winner = this.state.currentTurn;
             }
+
+            return winner;
         }
 
 
@@ -124,7 +149,8 @@
                 board: [["","",""],["","",""],["","",""]],
                 currentTurn: "X",
                 moves: 0,
-                gameOver: false
+                gameOver: false,
+                winner: ""
             });
         }
 
@@ -133,11 +159,13 @@
         render() {
             return (
                 <div id="app">
-                    <h1>TicTacToe</h1>
+                    <h1>Tic Tac Toe</h1>
                     <h3>Current Turn: {this.state.currentTurn}</h3>
                     <div id="controls">
                         <button onClick={() => this.resetGame()}>Reset Game</button>
                     </div>
+                    {/*Next block only appears if there is a winner or the game is a tie*/}
+                    {this.state.winner != "" ? <div id="gameMessage"><span>{this.state.winner}</span></div> : null} 
                     <Board board={this.state.board} updateFunction={this.updateBoard}/>
                 </div>
             )
