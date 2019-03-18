@@ -1,0 +1,19 @@
+img {
+    height: 305px;
+}
+
+#data {
+    margin: 25px 0px 0px 300px;
+    width: 500px;
+    min-height: 250px;
+    border: 2px solid black;
+    padding: 20px 30px;
+}
+
+#name {
+    text-align: center;
+}
+
+p {
+    margin: 3px px;
+}

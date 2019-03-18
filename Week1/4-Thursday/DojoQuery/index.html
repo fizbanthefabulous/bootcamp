@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>Document</title>
+    </head>
+    <body>
+        <div class="contentWrapper">
+            <button id="myButton">Click</button>
+        </div>
+
+
+        <script>
+            (function (window) {
+                window.$Dojo = function(id) {
+                    let el = document.getElementById(id);
+
+                    return {
+                        click: function (functionForAClick) {
+                            el.onclick = functionForAClick;
+                        },
+                        hover: function (functionForHover, functionForMouseLeave) {
+                            el.onmouseenter = functionForHover;
+                            el.onmouseleave = functionForMouseLeave;
+                        },
+
+                        keypress: function (etc) {
+                            el.keypress = etc;
+                        }
+                    }
+                }
+            })(window);
+
+
+            $Dojo(`myButton`).click(function(){console.log(`I was clicked!`)});
+            $Dojo(`myButton`).hover(function(){console.log(`CLICK ME!!!!!!!`)}, function(){console.log(`Fine. Don't. Click. Me....`)});
+        </script>
+    </body>
+</html>
+

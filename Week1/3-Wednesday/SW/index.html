@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" type="text/css" href="style.css">
+        <title>Star Wars Scum</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <div id="lineup">
+                <img src="img/han.jpg" alt="Han Solo" id="14">
+                <img src="img/lando-calrissian.jpg" alt="Lando Calrissian" id="25">
+                <img src="img/fett.jpg" alt="Boba Fett" id="22">
+                <img src="img/bossk.jpg" alt="Bossk" id="24">
+            </div>
+
+            <div id="dossier">
+                <div id="data">
+
+                </div>
+            </div>
+        </div>
+
+        <script = type="text/javascript">
+            const swapiUrl = `https://swapi.co/api/people/`;
+            
+            function updateDossier(id)
+            {
+                $.get(`${swapiUrl}${id}/`,
+                    function(res){
+                        console.log(res);
+                        console.log(res.species[0]);
+
+                        $.get(`${res.species[0]}`,
+                            function(spec){
+                                console.log(spec);
+
+                                $('#data').html(`<h1 id="name">${res.name}</h1>`);
+                                $('#data').append(`<p>Height: ${res.height}cm</p>`);
+                                $('#data').append(`<p>Weight: ${res.mass}kg</p>`);
+                                $('#data').append(`<p>Species: ${spec.name}</p>`);
+                                $('#data').append(`<p>Language: ${spec.language}</p>`);
+                            },
+                            "json"
+                        );
+                    },
+                    "json"
+                );
+            }
+
+            $(`img`).click(function(){updateDossier(this.id);});
+        </script>
+    </body>
+</html>

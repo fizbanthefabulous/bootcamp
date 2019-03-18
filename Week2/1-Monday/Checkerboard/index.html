@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <title>Checkerboard</title>
+</head>
+
+<body>
+    <div id="app"></div>
+</body>
+
+<script>
+
+
+    // // var columns = prompt("Number of columns? : ");
+    // // var color1 = prompt("Colorone color? : ");
+    // // var color2 = prompt("Colorone color? : ");
+
+    // var columns = 9;
+    // var color1 = 'black';
+    // var color2 = 'red';
+
+
+    // function CheckerBoard(props) {
+    //     var functionsWeWant = [];
+    //     var colorForLine;
+
+    //     for (var i = 1; i <= columns; i++) {
+    //         functionsWeWant.push(React.createElement(Row, null, { rowNum: `${i}` }));
+    //     }
+
+    //     return functionsWeWant/* Some UI... perhaps a list of rows? */
+    // }
+
+
+    // function Row(props) {
+    //     //return /* Some UI... perhaps a list of cells? */
+
+    //     var width = 90 / columns;
+    //     //console.log(props.children.rowNum);
+    //     var functionsWeWant = [];
+    //     var colorForLine;
+    //     console.log('Row Number : ', props.children.rowNum);
+    //     for (var i = 1; i <= columns; i++) {
+    //         //console.log(props.children.rowNum);
+    //         //console.log(props.children.rowNum % 2);
+    //         if (props.children.rowNum + i % 2 === 0) {
+    //             //color1 = 'black';
+    //             //color2 = 'red';
+    //             if (i % 2 === 0) colorForLine = 'black'; else colorForLine = 'red';
+    //         } else {
+    //             if (i % 2 === 0) colorForLine = 'red'; else colorForLine = 'black';
+    //         }
+
+    //         functionsWeWant.push(React.createElement(Cell, { style: { backgroundColor: `${colorForLine}`, width: `${width}%`, float: 'left', content: "", display: 'block', paddingBottom: `${width}%` } }));
+    //     }
+
+    //     return React.createElement('div', null, functionsWeWant)
+    // }
+
+    // function Cell(props) {
+    //     return React.createElement('div', props);
+    // }
+
+    // const Square = (props) => {
+    //     const { text } = props;
+    //     return React.createElement('h1', props, text);
+    // }
+
+    // // And feel free to use the following object:
+    // var styles = {
+    //     row: { height: '20px' },
+    //     cell: { height: '20px', width: '20px', display: 'inline-block' },
+    //     colorA: { backgroundColor: 'black' },
+    //     colorB: { backgroundColor: 'white' }
+    // }
+
+    // const App = (props) => {
+
+    //     console.log(columns);
+
+    //     // var width = 90/columns;
+
+    //     // var functionsWeWant = [];
+    //     // var colorForLine;
+    //     // for (var i = 0; i < columns; i++){
+    //     //    if (i%2) colorForLine = color1; else colorForLine = color2;
+    //     //    functionsWeWant.push( React.createElement(Cell, {style: { backgroundColor: `${colorForLine}`, width: `${width}%`, float:'left', content: "", display: 'block', paddingBottom:`${width}%`, color:'white' }}  ));
+    //     // }
+
+
+
+    //     return React.createElement(CheckerBoard, null, null)
+    // }
+
+    
+    function black(){
+      return React.createElement('div', { style: { backgroundColor:'black', height:'50px', width:'50px', display: 'inline-block' }})
+    }
+    function red(){
+      return React.createElement('div', { style: { backgroundColor:'red', height:'50px', width:'50px', display: 'inline-block' }})
+    }
+    function br(){
+      return React.createElement('br', null, null);
+    }
+    const world = [];
+    
+    for(var i=0; i<10; i++){
+      for(var x=0; x<10; x++){
+        if((x+i)%2) world.push(black())
+        else world.push(red())
+      }
+      world.push(br());
+    }
+    const div = React.createElement('div', null, world);
+    ReactDOM.render(div, document.getElementById('app'));
+    
+    /*
+    //Events
+    const buttonProps = {
+      onClick(){ alert("You clicked me!"); }
+    }
+    const button = React.createElement('button', buttonProps, 'Click me!');
+    const div = React.createElement('div', null, button);
+    ReactDOM.render(div, document.getElementById('app'));
+    
+    
+    
+    ReactDOM.render(App(), document.getElementById('app'));
+    */
+
+</script>
+
+</html>

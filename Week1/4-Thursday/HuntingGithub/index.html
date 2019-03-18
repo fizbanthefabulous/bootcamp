@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+        <title>Hunting Github</title>
+    </head>
+    <body>
+        <div class="wrapper">
+            <button id="theButton">Press Me!</button>
+
+            <div>
+                <h1 id="name"></h1>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            var url=`https://api.github.com/users/fizbanthefabulous`;
+
+            $(`#theButton`).click(releaseTheHounds);
+
+
+            //With JQuery
+            function releaseTheHounds() {
+                $.get(url, displayName, "json");
+            }
+
+            function displayName(data) {
+                console.log(data);
+
+                $(`#name`).html(data.login);
+            }
+
+
+
+            // //With Promises
+            // function releaseTheHounds() {
+            //     var data = new Promise(function(resolve, reject){
+            //         query
+            //     });
+            // }
+
+        </script>
+    </body>
+</html>

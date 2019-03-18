@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie=edge">
+        <title>FibNacci</title>
+    </head>
+    <body>
+        <script>
+            function fib() {
+                // Some variables here
+                var current = 0;
+                var next = 1;
+
+                function nacci() {
+                    // do something to those variables here
+                    let temp = next;                 
+                    next += current;
+                    current = temp;
+
+                    console.log(current);
+                }
+                return nacci;
+            }
+            var fibCounter = fib();
+            fibCounter(); // should console.log "1"
+            fibCounter(); // should console.log "1"
+            fibCounter(); // should console.log "2"
+            fibCounter(); // should console.log "3"
+            fibCounter(); // should console.log "5"
+            fibCounter(); // should console.log "8"
+        </script>
+    </body>
+</html>

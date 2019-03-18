@@ -1,0 +1,16 @@
+.counter {
+    border: 2px solid black;
+    height: 100px;
+    width: 400px;
+    text-align: center;
+    line-height: 50px;
+    margin: 25px 300px;
+}
+
+.counter span {
+    display: block;
+}
+
+.counter button{
+    margin: 0px 50px;
+}

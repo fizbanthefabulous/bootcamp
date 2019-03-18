@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    
+    <title>Voting App Part 1</title>
+    
+    <script src="node_modules/react/umd/react.development.js"></script>
+    <script src="node_modules/react-dom/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+</head>
+
+<body>
+    <div id='content'></div>
+</body>
+
+
+
+
+<script type="text/babel">
+    const Ballot = (props) => {
+
+        var theX = 50;
+        const ballotChoiceStyle = {
+            textAlign: 'center',
+            lineHeight: `${theX}px`,
+            border: '1px solid black',
+            height: `${theX}px`,
+            width: `${theX * 8}px`
+        };
+
+        props.canidates = props.canidates.sort((a, b) => {
+            return b.counter - a.counter;
+        });
+
+        const ballotChoices = props.canidates.map((canidate, idx) => {
+            const VoteClicker = () => {
+                canidate.counter = canidate.counter + 1;
+                ReactDOM.render(Ballot(canidateCollection), document.getElementById('content'));
+                alert('You voted for ' + canidate.title);
+            }
+
+            return <li key={idx + 1} style={ballotChoiceStyle} onClick={VoteClicker} >{canidate.counter} --- {canidate.title}</li>
+        });
+
+        return (
+            <div>
+                <h1 style={{ textAlign: 'center' }}>Vote Your JS Library</h1>
+                <ul style={{ listStyleType: 'none' }}>
+                    {ballotChoices}
+                </ul>
+            </div>
+        )
+    }
+
+    const canidateCollection = { canidates: [{ title: 'redux', counter: 0 }, { title: 'vue', counter: 0 }, { title: 'Ember', counter: 0 }, { title: 'Angular', counter: 0 }] };
+    
+    ReactDOM.render(Ballot(canidateCollection), document.getElementById('content'));
+
+</script>
+</html>
