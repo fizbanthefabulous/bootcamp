@@ -22,6 +22,10 @@ class MemoryGame extends Component {
         { value: 'martell', hidden: true },
         { value: 'targaryen', hidden: true },
         { value: 'targaryen', hidden: true },
+        { value: 'tyrell', hidden: true },
+        { value: 'tyrell', hidden: true },
+        { value: 'tully', hidden: true },
+        { value: 'tully', hidden: true },
       ],
       click1id: null,
       click2id: null,
@@ -78,7 +82,7 @@ class MemoryGame extends Component {
         tempGuessCounter += 1;
 
         //If this will be the last match of the game set the game to over
-        if (matches === 5) {
+        if (matches === 7) {
           //game state is over
           tempGameState = 'over';
         }

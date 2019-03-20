@@ -8,6 +8,8 @@ const TileKey = {
   'martell': '../img/martell.png',
   'greyjoy': '../img/greyjoy.png',
   'targaryen': '../img/targaryen.png',
+  'tyrell' : '../img/tyrell.png',
+  'tully' : '../img/tully.png',
 }
 
 const Tile = (props) => {
