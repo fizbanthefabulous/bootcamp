@@ -1,0 +1,23 @@
+#formGrid {
+    text-align:left;
+    display:grid;
+    grid-template-columns: max-content max-content max-content;
+    grid-gap:5px;
+    margin: auto;
+    margin-bottom: 30px;
+}
+
+#formGrid label {
+    margin-left: 10px;
+    margin-right: 10px;
+    text-anchor: end;
+    text-align:right;
+}
+
+#formGrid label:after {
+    content: ":";
+}
+
+.validationMessage {
+    color: red;
+}
