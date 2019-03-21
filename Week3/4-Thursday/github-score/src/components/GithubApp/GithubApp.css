@@ -1,0 +1,8 @@
+.appWrapper {
+    width: 960px;
+    height: 200px;
+    margin: auto;
+    margin-top: 20px;
+    background-color: lightgrey;
+    border: 3px solid black;
+}
