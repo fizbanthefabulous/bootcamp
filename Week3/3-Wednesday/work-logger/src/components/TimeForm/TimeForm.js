@@ -89,7 +89,7 @@ class TimeForm extends Component {
           {!this.state.validDescription ? <span className="validationMessage">A description must have at least 5 characters</span> : <span></span>}
 
           <label htmlFor="minutes">Minutes</label>
-          <input type="text" name="minutes" id="minutes"  onChange={this.handleChange}/>
+          <input type="number" name="minutes" id="minutes"  onChange={this.handleChange}/>
           {!this.state.validTime ? <span className="validationMessage">Must be a time span between 0 and 240 minutes</span> : <span></span>}
 
           <button type="submit" name="add" id="add" disabled={!this.state.canAdd}>Add</button>
