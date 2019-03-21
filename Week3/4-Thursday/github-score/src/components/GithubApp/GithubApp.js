@@ -13,6 +13,7 @@ class GithubApp extends Component {
         }
     }
 
+    //Search for user profile from Github
     searchGithub = (username) => {
         axios.get(`https://api.github.com/users/${username}`)
         .then((response) => {
