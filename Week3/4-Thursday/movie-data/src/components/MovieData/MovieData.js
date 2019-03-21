@@ -18,14 +18,14 @@ class MovieData extends Component {
     searchNotImdb = (props) => {
     //searchNotImdb(props) {
         console.log(props);
-        var self = this;
+        
 
         //axios.get(`http://freemdb.com/api/v1/Movies?PageNumber=1&PageSize=20&Title=${props}`)
         axios.get(`http://www.omdbapi.com/?i=tt3896198&apikey=9681f08f&s=${props}`)
-            .then(function (response) {
+            .then((response) => {
                 console.log(response);
                 console.log(response.data.Search[0]);
-                self.setState({
+                this.setState({
                     movie: response.data.Search[0],
                 })
             })
