@@ -1,0 +1,22 @@
+header img {
+    width: 100px;
+    height: 100px;
+}
+
+#nav {
+    display: inline-block;
+    vertical-align: top;
+    margin-top: 20px;
+    margin-left: 30px;
+}
+
+#nav a{
+    background-color: lightgray;
+    text-decoration: None;
+    color: black;
+    min-height: 75px;
+    min-width: 150px;
+    margin-right: 30px;
+    padding: 5px 20px;
+    border-radius: 7.5px;
+}
