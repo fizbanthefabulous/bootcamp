@@ -1,0 +1,16 @@
+import React from 'react';
+import { Link } from 'react-router-dom';
+import './LedgerEntry.css';
+
+const LedgerEntry = (props) => {
+    return (
+            <tr>
+                <td>{props.action}</td>
+                <td>{props.amount}</td>
+                <td>{props.valuation}</td>
+                <td><Link to={'/transaction/'+props.id} className="button">Details</Link></td>
+            </tr>
+    )
+}
+
+export default LedgerEntry

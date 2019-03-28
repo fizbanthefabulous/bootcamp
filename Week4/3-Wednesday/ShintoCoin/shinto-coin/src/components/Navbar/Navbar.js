@@ -10,7 +10,7 @@ const Navbar = (props) => {
                 <Link to='/home'>Home</Link>
                 <Link to='/mine'>Mine Coins</Link>
                 <Link to='/buy'>Buy Coins</Link>
-                <Link to='/mine'>Sell Coins</Link>
+                <Link to='/sell'>Sell Coins</Link>
                 <Link to='/ledger'>Browse Ledger</Link>
             </div>
         </header>

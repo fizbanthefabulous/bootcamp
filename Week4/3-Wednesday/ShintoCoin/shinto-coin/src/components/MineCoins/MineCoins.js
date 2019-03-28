@@ -21,6 +21,7 @@ class MineCoins extends React.Component {
         this.props.mineFunc();
     }
 
+    //http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote
     render() {
         return (
             <div id="mine">
