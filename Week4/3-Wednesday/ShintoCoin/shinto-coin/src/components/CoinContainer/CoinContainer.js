@@ -8,6 +8,7 @@ import MineCoins from '../MineCoins/MineCoins';
 import BuyCoins from '../BuyCoins/BuyCoins';
 import SellCoins from '../SellCoins/SellCoins';
 import Ledger from '../Ledger/Ledger';
+import Transaction from '../Transaction/Transaction';
 
 
 class CoinContainer extends React.Component {
@@ -91,6 +92,7 @@ class CoinContainer extends React.Component {
                         <Route path='/buy' render={() => <BuyCoins buyFunc={this.buyShintoCoins} coins={this.state.userCoins} valuation={this.state.shintoValuation}/> } />
                         <Route path='/sell' render={() => <SellCoins sellFunc={this.sellShintoCoins} coins={this.state.userCoins} valuation={this.state.shintoValuation}/> } />
                         <Route path='/ledger' render={() => <Ledger ledger={this.state.ledger} /> } />
+                        <Route path='/transaction/:id' render={(props) => <Transaction {...props} /> } />
                     </Switch>
                 </BrowserRouter>
             </div>

@@ -72,6 +72,52 @@ app.get("/ledger", (request, response) => {
 })
 
 
+//Get current ledger, coins, and value
+app.get("/ledger/:id", (request, response) => {
+    console.log("Fetching all the things!");
+    
+    axios.get(`http://5c9916454236560014393207.mockapi.io/ledger/${request.params.id}`)
+    .then((ledgerGetResponse) => {
+        return response.json(ledgerGetResponse.data);
+    })
+})
+
+
+app.get("/quote", (request, response) => {
+    let quote, answer, tokens, idx;
+
+    axios.get("http://swquotesapi.digitaljedi.dk/api/SWQuote/RandomStarWarsQuote")
+    .then((quoteGetResponse) => {
+        console.log(quoteGetResponse.data);
+        quote = quoteGetResponse.data.starWarsQuote;
+        idx = quote.indexOf('-');
+        console.log("hyphen idx: ",idx);
+        if(idx === -1)
+            idx = quote.indexOf('&#8211;');
+
+        console.log("en dash idx:", idx);
+
+
+        if(idx > - 1) {
+            answer = quote.substring(idx+1).trim();
+            quote = quote.substring(0,idx).trim();
+            console.log("quote: ",quote);
+            console.log("answer: ",answer);
+        
+            return response.json({quote, answer});
+        }
+        else {
+            throw new Error("Derp!");
+        }
+    })
+    .catch((error) => {
+        console.log("We aren't going to space today!")
+        console.log(error.message);
+        return response.status(500).send(error.message);
+    })
+})
+
+
 app.get("*", (request, response) => { 
     response.sendFile(path.resolve(__dirname+"/../shinto-coin/build/index.html"));
 })

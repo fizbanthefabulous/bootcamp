@@ -4,3 +4,8 @@
     border-radius: 7.5px;
     margin-left: 5px;
 }
+
+#quote {
+    font-style: italic;
+    font-size: 10pt;
+}

@@ -8,7 +8,7 @@ const LedgerEntry = (props) => {
                 <td>{props.action}</td>
                 <td>{props.amount}</td>
                 <td>{props.valuation}</td>
-                <td><Link to={'/transaction/'+props.id} className="button">Details</Link></td>
+                <td><Link to={'/transaction/'+props.id} className="details">Details</Link></td>
             </tr>
     )
 }

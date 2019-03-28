@@ -1,0 +1,21 @@
+#ledgerTable {
+    display: inline-block;
+    border: 1px solid green;
+}
+
+#ledgerTable span{
+    color: black;
+    background-color: lightgray;
+    text-align: center;
+    display: block;
+    padding: 3px;
+}
+
+#ledgerTable td{
+    margin: 0px 3px;
+    text-align: center;
+}
+
+#ledgerTable thead{
+    font-weight: bold;
+}

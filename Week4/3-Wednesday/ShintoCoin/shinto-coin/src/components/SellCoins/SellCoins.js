@@ -36,7 +36,7 @@ class SellCoins extends React.Component {
         console.log(this.props);
         console.log(this.state);
         return (
-            <div id="mine">
+            <div id="sell">
                 <h1>Sell ShintoCoins</h1>
                 <p>
                     Current ShintoCoin Value: ${this.props.valuation}.00

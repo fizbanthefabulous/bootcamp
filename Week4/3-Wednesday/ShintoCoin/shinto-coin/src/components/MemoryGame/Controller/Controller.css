@@ -1,0 +1,13 @@
+.controller {
+  width: 308px;
+  height: 21px;
+  border-radius: 15px;
+  background-color: black;
+  margin-top: 20px;
+  padding: 10px 0px;
+  color: white;
+}
+
+.countDown {
+  font-size: 12pt;
+}
