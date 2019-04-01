@@ -1,0 +1,8 @@
+#ppm-navbar{
+    background-color: lightgray;
+}
+
+.ppm-item {
+    border-right: 1px solid lightgray;
+    margin-right: 30px;
+}

@@ -1,0 +1,9 @@
+.ppm-form {
+    text-align: left;
+    margin-left: 10px;
+    margin-top: 20px;
+}
+
+.ppm-val-mess {
+    color: red !important;
+}
