@@ -9,7 +9,7 @@ app.use(express.static(__dirname+"./../ppm-app/build/"));
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post("/products", (request, response) => {
+app.post("/api/products", (request, response) => {
     console.log(request.body);
 
     axios.post("http://5ca14971c1b53400149aca17.mockapi.io/products", request.body)
@@ -21,7 +21,7 @@ app.post("/products", (request, response) => {
     })
 })
 
-app.get("/products", (request, response) => {
+app.get("/api/products", (request, response) => {
     axios.get("http://5ca14971c1b53400149aca17.mockapi.io/products")
     .then((mockApiGetResponse) => {
         return response.json(mockApiGetResponse.data);
@@ -31,7 +31,7 @@ app.get("/products", (request, response) => {
     })
 })
 
-app.get("/products/:id", (request, response) => {
+app.get("/api/products/:id", (request, response) => {
     let id = request.params.id;
     console.log(id);
 
@@ -44,7 +44,7 @@ app.get("/products/:id", (request, response) => {
     })
 })
 
-app.put("/products/:id", (request, response) => {
+app.put("/api/products/:id", (request, response) => {
     let id = request.params.id;
     console.log(id);
 
@@ -61,19 +61,20 @@ app.put("/products/:id", (request, response) => {
 })
 
 
-app.delete("/products/:id", (request, response) => {
+app.delete("/api/products/:id", (request, response) => {
     let id = request.params.id;
     console.log(id);
 
     axios.delete(`http://5ca14971c1b53400149aca17.mockapi.io/products/${id}`)
     .then((mockApiDeleteResponse) => {
-       return axios.get(`http://5ca14971c1b53400149aca17.mockapi.io/products/${id}`)
+       return axios.get(`http://5ca14971c1b53400149aca17.mockapi.io/products`)
     })
     .then((mockApiGetResponse) => {
         return response.json(mockApiGetResponse.data);
     })
     .catch((error) => {
         console.log("Frell");
+        console.log("error",error.message);
     })
 })
 

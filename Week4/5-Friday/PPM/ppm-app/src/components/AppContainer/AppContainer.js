@@ -18,7 +18,7 @@ class AppContainer extends React.Component {
     }
 
     componentDidMount() {
-        axios.get("http://localhost:4200/products")
+        axios.get("http://localhost:4200/api/products")
         .then((response) => {
             this.setState({
                 products: response.data,
@@ -26,37 +26,45 @@ class AppContainer extends React.Component {
         })
     }
 
-    addProduct = (product) => {
+    addProduct = (product, callback) => {
         console.log("adding a product");
 
-        axios.post("http://localhost:4200/products", product)
+        axios.post("http://localhost:4200/api/products", product)
         .then((response) => {
             this.setState({
                 products: [...this.state.products, response.data],
             }, () => {
                 console.log("returning");
-                return true;
+                callback();
             })
         })
     }
 
-    editProduct = (product) => {
+    editProduct = (product, callback) => {
         console.log("editing product id = ", product.id);
-        axios.put(`http://localhost:4200/products/${product.id}`, {title: product.title, price: product.price, url: product.url})
+        axios.put(`http://localhost:4200/api/products/${product.id}`, {title: product.title, price: product.price, url: product.url})
         .then((response) => {
             this.setState({
                 products: response.data,
+            }, () => {
+                console.log("returning");
+                callback();
             })
         })
     }
 
-    deleteProduct = (id) => {
+    deleteProduct = (id, callback = null) => {
         console.log("Deleting product id = ",id);
 
-        axios.delete(`http://localhost:4200/products/${id}`)
+        axios.delete(`http://localhost:4200/api/products/${id}`)
         .then((response) => {
             this.setState({
                 products: response.data,
+            }, () => {
+                if(callback !== null) {
+                    console.log("returning");
+                    callback();
+                }
             })
         })
     }

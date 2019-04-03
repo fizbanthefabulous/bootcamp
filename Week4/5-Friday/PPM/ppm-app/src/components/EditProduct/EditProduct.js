@@ -1,8 +1,9 @@
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import './CreateProduct.css';
+import './EditProduct.css';
+import axios from 'axios';
 
-class CreateProduct extends React.Component {
+class EditProduct extends React.Component {
     constructor(props) {
         super(props);
 
@@ -10,57 +11,92 @@ class CreateProduct extends React.Component {
             title: null,
             price: null,
             url: null,
+            id: null,
             titleError: true,
             priceError: true,
-            canCreate: false,
+            canEdit: false,
         }
+    }
+
+    componentDidMount() {
+        console.log(this.props);
+
+        axios.get(`http://localhost:4200/api/products/${this.props.match.params.id}`)
+        .then((response) => {
+            console.log(response.data);
+
+            document.getElementById('title').value = response.data.title;
+            document.getElementById('price').value = response.data.price;
+            document.getElementById('url').value = response.data.url;
+
+            this.setState({
+                title: response.data.title,
+                price: response.data.price,
+                url: response.data.url,
+                id: response.data.id,
+            }, () => this.validateInputs())
+        })
+    }
+
+    validateInputs = () => {
+        let priceError = this.state.priceError;
+        let titleError = this.state.titleError;
+        let canEdit = false;
+
+        if(this.state.title.length >= 4)
+            titleError = false;
+        else
+            titleError = true;
+    
+        if(this.state.price.trim() !== "")
+            priceError = false;
+        else
+            priceError = true;
+        
+        if(!priceError && !titleError)        
+            canEdit = true;
+
+        this.setState({
+            priceError,
+            titleError,
+            canEdit,
+        })
     }
 
     handleChange = (e) => {
         let id = e.target.id;
         let value = e.target.value;
-        let priceError = this.state.priceError;
-        let titleError = this.state.titleError;
-        let canCreate = false;
-
-        if(id === "title") {
-            if(value.length >= 4)
-                titleError = false;
-            else
-                titleError = true;
-        }
-        else if(id === "price") {
-            if(value.trim() !== "")
-                priceError = false;
-            else
-                priceError = true;
-        }
-        
-        if(!priceError && !titleError)        
-            canCreate = true;
+       
         
         this.setState({
             [id]: value,
-            priceError,
-            titleError,
-            canCreate,
-        })
+        }, () => this.validateInputs())
     }
 
-    createNewProduct = (e) => {
+    editProduct = (e) => {
         e.preventDefault();
-        console.log("creating new product");
+        console.log("editing product");
 
-        this.props.addProductFunc({title: this.state.title, price: this.state.price, url: this.state.url});
-        this.props.history.push('/products');
+        this.props.editProductFunc({title: this.state.title, price: this.state.price, url: this.state.url, id: this.state.id}, this.redirect);
     } 
+
+    deleteProduct = (e) => {
+        e.preventDefault();
+
+        this.props.deleteProductFunc(this.state.id, this.redirect);
+    }
+
+    redirect = () => {
+        console.log("redirect");
+        this.props.history.push('/products');
+    }
 
     render() {
         console.log(this.state);
         return (
             <div className="ppm-form">
                 <h1>Create a New Product</h1>
-                <form onSubmit={this.createNewProduct}>
+                <form>
                     <div className="form-group">
                         <label htmlFor="title">Title</label>
                         <input
@@ -113,12 +149,12 @@ class CreateProduct extends React.Component {
                             onChange={(e) => this.handleChange(e)}
                         />
                     </div>
-
-                    <button type="submit" disabled={!this.state.canCreate} className="btn btn-success">Create</button>
+                    <button onClick={this.deleteProduct} className="btn btn-danger">Delete Product</button>
+                    <button onClick={this.editProduct} disabled={!this.state.canEdit} className="btn btn-primary">Edit Product</button>
                 </form>
             </div>
         );
     }
 }
 
-export default withRouter(CreateProduct);
+export default withRouter(EditProduct);
