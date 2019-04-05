@@ -1,0 +1,15 @@
+.dossier-add-person-col {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+}
+
+.dossier-add-person-row {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dossier-add-tab {
+    margin-top: 5px;
+}
+

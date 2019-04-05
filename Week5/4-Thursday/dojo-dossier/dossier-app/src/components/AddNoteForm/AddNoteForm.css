@@ -1,0 +1,10 @@
+.dossier-add-note-row {
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#note {
+    width: 75%;
+    margin-right: 10px;
+}
