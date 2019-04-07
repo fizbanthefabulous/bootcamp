@@ -1,0 +1,6 @@
+.history-display {
+    border: 1px solid black;
+    margin-top: 10px;
+    height: 300px;
+    overflow: scroll;
+}

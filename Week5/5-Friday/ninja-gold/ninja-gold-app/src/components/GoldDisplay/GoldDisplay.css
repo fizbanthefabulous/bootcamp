@@ -1,0 +1,5 @@
+.gold-display {
+    border: 1px solid black;
+    display: inline-flex;
+    padding: 0px 10px;
+}

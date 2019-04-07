@@ -1,0 +1,15 @@
+.gold-actions-row {
+    display: flex;
+    border: 1px solid black;
+    padding: 20px 30px;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+.gold-actions-column {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    vertical-align: middle;
+    width: 150px;
+}
