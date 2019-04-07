@@ -44,7 +44,7 @@ export function addActionToHistory(type, gold) {
     else if(type === 'house')
         amount = Math.ceil(Math.random() * 9) + 6;
     else
-        amount = Math.ceil(Math.random() * 201) - 100;
+        amount = Math.ceil(Math.random() * 201) - 101;
 
     newTotal += amount;
     
