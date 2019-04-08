@@ -1,0 +1,10 @@
+.ppm-product {
+    width: 18rem;
+    min-width: 288px;
+    display: inline-block;
+}
+
+.ppm-button {
+    width: 100%;
+    margin-top: 5px;
+}
