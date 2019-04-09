@@ -3,3 +3,30 @@
     justify-content: space-evenly;
     flex-wrap: wrap;
 }
+
+  .product-appear {
+    opacity: 0.01;
+  }
+  
+  .product-appear.product-appear-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+  }
+
+  .product-enter {
+    opacity: 0.01;
+  }
+  
+  .product-enter.product-enter-active {
+    opacity: 1;
+    transition: opacity .5s ease-in;
+  }
+
+  .product-leave {
+    opacity: 1;
+  }
+  
+  .product-leave.product-leave-active {
+    opacity: 0.01;
+    transition: opacity .5s ease-out;
+  }

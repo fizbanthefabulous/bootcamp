@@ -3,16 +3,27 @@ import './ProductList.css';
 import { connect } from 'react-redux';
 import { updateCurrentPage } from '../../store/redux';
 import Product from './Product/Product';
+import { CSSTransitionGroup } from 'react-transition-group';
+//import { TransitionGroup, CSSTransition } from "react-transition-group";
 
 const ProductList = (props) => {
-    if(props.page !== 'products')
+    if (props.page !== 'products')
         props.updateCurrentPage('products');
 
-    let productList = props.products.map((product, idx) => <Product product={product} key={idx} /> )
+    let productList = props.products.map((product, idx) => <Product product={product} key={idx} />)
 
     return (
-        <div className="product-list">
-            {productList}
+        <div>
+            <CSSTransitionGroup
+                className="product-list"
+                transitionName="product"
+                transitionAppear={true}
+                transitionAppearTimeout={500}
+                transitionEnterTimeout={500}
+                transitionLeaveTimeout={500}
+            >
+                {productList}
+            </CSSTransitionGroup>
         </div>
     )
 }
