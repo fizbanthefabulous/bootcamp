@@ -30,6 +30,7 @@ export const reducers = (state = initialState1, action) => {
             return {
                 ...state,
                 products: [...action.products],
+                ready: true,
             };
 
         case 'INIT_STATE':
@@ -43,8 +44,8 @@ export const reducers = (state = initialState1, action) => {
 
         case 'UPDATE_CURRENT_PAGE':
             console.log(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --")
-            console.log(" -- REDUCER -- INIT_STATE | state: ", state)
-            console.log(" -- REDUCER -- INIT_STATE | action", action)
+            console.log(" -- REDUCER -- UPDATE_CURRENT_PAGE | state: ", state)
+            console.log(" -- REDUCER -- UPDATE_CURRENT_PAGE | action", action)
             return {
                 ...state,
                 page: action.page,
@@ -62,6 +63,7 @@ const initialState1 = {
     products: [],
     socketSendFunc: null,
     page: null,
+    ready: false,
 };
 
 

@@ -1,0 +1,11 @@
+.ppm-create-page {
+    padding: 30px;
+}
+
+.ppm-create-form {
+    margin-top: 20px;
+}
+
+.ppm-err {
+    color: red;
+}

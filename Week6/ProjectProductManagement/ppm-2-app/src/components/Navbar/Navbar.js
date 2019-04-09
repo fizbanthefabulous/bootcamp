@@ -14,7 +14,7 @@ const Navbar = (props) => {
                             <Link to='/home' className="nav-link">Home</Link>
                         </li>
                         <li className={`nav-item${props.page === 'products' ? ' active' : ''}`}>
-                            <Link to='products' className="nav-link">Products List</Link>
+                            <Link to='/products' className="nav-link">Products List</Link>
                         </li>
                         <li className={`nav-item${props.page === 'products/new' ? ' active' : ''}`}>
                             <Link to='products/new' className="nav-link">Product Creation</Link>

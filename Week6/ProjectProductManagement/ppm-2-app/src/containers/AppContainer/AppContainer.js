@@ -7,6 +7,8 @@ import Navbar from '../../components/Navbar/Navbar';
 import ProductList from '../../components/ProductList/ProductList';
 import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import './AppContainer.css';
+import CreateProduct from '../../components/CreateProduct/CreateProduct';
+import EditProduct from '../../components/EditProduct/EditProduct';
 
 class AppContainer extends React.Component {
     constructor(props) {
@@ -41,28 +43,38 @@ class AppContainer extends React.Component {
 
     sendMsgToConnectedServer = (msgType, message) => {
         console.log(`Sending - action:${msgType} -- message:${message}`);
+        this.socket.emit(msgType, message);
     }
 
 
     render() {
         return (
             <div className='app-container'>
+            {
+                this.props.ready ?
                 <BrowserRouter>
                     <Navbar />
 
                     <Switch>
                         <Route exact path='/' render={() => <Redirect to='/home' />} />
                         <Route path='/home' component={Home} />
-                        <Route path='/products' component={ProductList} />
+                        <Route exact path='/products' component={ProductList} />
+                        <Route path='/products/new' component={CreateProduct} />
+                        <Route path='/products/edit/:id' render={(props) => <EditProduct {...props} /> } />
                     </Switch>
                 </BrowserRouter>
+
+                :
+
+                <h1>Loading...</h1>
+            }
             </div>
         )
     }
 }
 
 const mapStateToProps = (state) => ({
-    //Nothing needed from state
+    ready: state.ready,
 })
 
 const mapDispatchToProps = (dispatch) => ({
