@@ -1,7 +1,8 @@
 import React from 'react';
 import './EditRestaurant.css';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
+import { editRestaurant } from '../../store/redux';
 
 class EditRestaurant extends React.Component {
     constructor(props) {
@@ -11,6 +12,7 @@ class EditRestaurant extends React.Component {
             name: '',
             cuisine: '',
             nameErr: true,
+            nameErrMessage: 'Restaurant name must be at least three characters long.',
             cuisineErr: true,
             canSubmit: false,
         }
@@ -18,12 +20,12 @@ class EditRestaurant extends React.Component {
 
     componentDidMount() {
         console.log(this.props);
-        let restaurantIdx = this.props.restaurantList.findIndex((restaurant) => restaurant.id === this.props.match.params.id);
+        let restaurantIdx = this.props.restaurantList.findIndex((restaurant) => restaurant.id === this.props.id);
 
-        if(restaurantIdx > -1) {
+        if (restaurantIdx > -1) {
             let restaurant = this.props.restaurantList[restaurantIdx];
 
-            console.log("Restaurant to Edit = ",restaurant);
+            console.log("Restaurant to Edit = ", restaurant);
 
             document.getElementById('name').value = restaurant.name;
             document.getElementById('cuisine').value = restaurant.cuisine;
@@ -43,20 +45,22 @@ class EditRestaurant extends React.Component {
         let cuisineErr = true;
         let nameErr = true;
         let canSubmit = false;
-        
-        if(this.state.name.trim().length > 2)
+        let nameErrMessage = 'Restaurant name must be at least three characters long';
+
+        if (this.state.name.trim().length > 2)
             nameErr = false;
 
-        if(this.state.cuisine.trim().length > 2)
+        if (this.state.cuisine.trim().length > 2)
             cuisineErr = false;
 
-        if(!nameErr && !cuisineErr)
+        if (!nameErr && !cuisineErr)
             canSubmit = true;
 
         this.setState({
             nameErr,
             cuisineErr,
             canSubmit,
+            nameErrMessage
         })
     }
 
@@ -71,8 +75,19 @@ class EditRestaurant extends React.Component {
 
         console.log('editing a restaurant!');
 
-        this.props.send('edit-restaurant', {id: this.state.id, name: this.state.name, cuisine: this.state.cuisine});
-        this.props.history.push('/restaurants');
+        let restaurantIdx = this.props.restaurantList.findIndex((restaurant) => restaurant.name.trim().toLowerCase() === this.state.name.trim().toLowerCase());
+
+        if (restaurantIdx === -1) {
+            this.props.send('edit-restaurant', { id: this.state.id, name: this.state.name, cuisine: this.state.cuisine });
+            //this.props.history.push('/restaurants');
+            this.props.editRestaurant(null);
+        }
+        else {
+            this.setState({
+                nameErr: true,
+                nameErrMessage: 'Restaurant name already taken.'
+            })
+        }
     }
 
     render() {
@@ -84,16 +99,16 @@ class EditRestaurant extends React.Component {
                 <form className='restaurant-form' onSubmit={(event) => this.editRestaurant(event)}>
                     <label htmlFor='restaurant-name'>Restaurant name:</label>
                     <br />
-                    <input type='text' id='name' name='name' className='restaurant-form-input' onChange={(event) => this.handleChange(event)}/>
+                    <input type='text' id='name' name='name' className='restaurant-form-input' onChange={(event) => this.handleChange(event)} />
                     {this.state.nameErr ?
-                        <small id="nameErr" className="form-text">Restaurant name must be at least three characters long.</small>
+                        <small id="nameErr" className="form-text">{this.state.nameErrMessage}</small>
                         :
                         <small>{/*Holding space for formating reasons*/}</small>
                     }
 
                     <label htmlFor='cuisine'>Cuisine:</label>
                     <br />
-                    <input type='text' id='cuisine' name='cuisine' className='restaurant-form-input' onChange={(event) => this.handleChange(event)}/>
+                    <input type='text' id='cuisine' name='cuisine' className='restaurant-form-input' onChange={(event) => this.handleChange(event)} />
                     {this.state.cuisineErr ?
                         <small id="cuisineErr" className="form-text">Cuisine must be at least three characters long.</small>
                         :
@@ -117,6 +132,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     //No actions needed
+    editRestaurant: (id) => dispatch(editRestaurant(id)),
 })
 
 export default connect(

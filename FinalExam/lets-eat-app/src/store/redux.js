@@ -17,6 +17,12 @@ export const newRestaurantReviews = (reviews) => ({
     reviews
 });
 
+export const editRestaurant = (id) => ({
+    type: 'EDIT_RESTAURANT',
+    id
+});
+
+
 
 ///REDUCERS
 export const reducers = (state = initialState1, action) => {
@@ -52,6 +58,15 @@ export const reducers = (state = initialState1, action) => {
                 reviews: [...action.reviews],
             };
 
+        case 'EDIT_RESTAURANT':
+            console.log(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --")
+            console.log(" -- REDUCER -- EDIT_RESTAURANT | state: ", state)
+            console.log(" -- REDUCER -- EDIT_RESTAURANT | action", action)
+            return {
+                ...state,
+                editRestaurantId: action.id,
+            };
+
         default:
             return state;
     }
@@ -66,6 +81,7 @@ const initialState1 = {
     ready: false,
     socketSendFunc: null,
     viewRestaurantId: null,
+    editRestaurantId: null,
 };
 
 

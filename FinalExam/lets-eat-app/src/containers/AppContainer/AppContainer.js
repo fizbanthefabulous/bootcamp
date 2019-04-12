@@ -59,16 +59,26 @@ class AppContainer extends React.Component {
             <div className='app-container'>
                 <h1>Let's eat</h1>
                 {this.props.ready ?
-                    <BrowserRouter>
-                        <Switch>
-                            <Route exact path='/' render={() => <Redirect to='/restaurants' />} />
-                            <Route exact path='/restaurants' component={Home} />
-                            <Route path='/restaurants/new' component={AddRestaurant} />
-                            <Route path='/restaurants/:id/edit' render={(props) => <EditRestaurant {...props}/>} />
-                            <Route exact path='/restaurants/:id' render={(props) => <RestaurantReviews {...props}/> } />
-                            <Route path='/restaurants/:id/review' render={(props) => <AddReview {...props}/>} />
-                        </Switch>
-                    </BrowserRouter>
+                    <div>
+                        <BrowserRouter>
+                            <Switch>
+                                <Route exact path='/' render={() => <Redirect to='/restaurants' />} />
+                                <Route exact path='/restaurants' component={Home} />
+                                <Route path='/restaurants/new' component={AddRestaurant} />
+                                {/* <Route path='/restaurants/:id/edit' render={(props) => <EditRestaurant {...props}/>} /> */}
+                                <Route exact path='/restaurants/:id' render={(props) => <RestaurantReviews {...props} />} />
+                                <Route path='/restaurants/:id/review' render={(props) => <AddReview {...props} />} />
+                            </Switch>
+                        
+                        <div id='edit-div'>
+                            {this.props.editRestaurantId !== null ?
+                                <EditRestaurant id={this.props.editRestaurantId} />
+                                :
+                                null
+                            }
+                        </div>
+                        </BrowserRouter>
+                    </div>
                     :
                     <h2>Loading...</h2>
                 }
@@ -80,6 +90,7 @@ class AppContainer extends React.Component {
 
 const mapStateToProps = (state) => ({
     ready: state.ready,
+    editRestaurantId: state.editRestaurantId,
 })
 
 const mapDispatchToProps = (dispatch) => ({

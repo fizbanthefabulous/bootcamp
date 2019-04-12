@@ -10,6 +10,7 @@ class AddRestaurant extends React.Component {
             name: '',
             cuisine: '',
             nameErr: true,
+            nameErrMessage: 'Restaurant name must be at least three characters long.',
             cuisineErr: true,
             canSubmit: false,
         }
@@ -19,6 +20,7 @@ class AddRestaurant extends React.Component {
         let cuisineErr = true;
         let nameErr = true;
         let canSubmit = false;
+        let nameErrMessage = 'Restaurant name must be at least three characters long';
 
         if (this.state.name.trim().length > 2)
             nameErr = false;
@@ -33,6 +35,7 @@ class AddRestaurant extends React.Component {
             nameErr,
             cuisineErr,
             canSubmit,
+            nameErrMessage,
         })
     }
 
@@ -50,8 +53,14 @@ class AddRestaurant extends React.Component {
         let restaurantIdx = this.props.restaurantList.findIndex((restaurant) => restaurant.name.trim().toLowerCase() === this.state.name.trim().toLowerCase());
 
         if (restaurantIdx === -1) {
-            this.props.send('add-restaurant', { name: this.state.name, cuisine: this.state.cuisine });
+            this.props.send('add-restaurant', { name: this.state.name, cuisine: this.state.cuisine, canDelete: true });
             this.props.history.push('/restaurants');
+        }
+        else {
+            this.setState({
+                nameErr: true,
+                nameErrMessage: 'Restaurant name already taken.'
+            })
         }
     }
 
@@ -66,7 +75,7 @@ class AddRestaurant extends React.Component {
                     <br />
                     <input type='text' id='name' name='name' className='restaurant-form-input' onChange={(event) => this.handleChange(event)} />
                     {this.state.nameErr ?
-                        <small id="nameErr" className="form-text">Restaurant name must be at least three characters long.</small>
+                        <small id="nameErr" className="form-text">{this.state.nameErrMessage}</small>
                         :
                         <small>{/*Holding space for formating reasons*/}</small>
                     }
