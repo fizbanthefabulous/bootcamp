@@ -7,14 +7,14 @@ export const initState = (socketSendFunc) => ({
     socketSendFunc
 });
 
-export const addAuthor = (authors) => ({
-    type: 'ADD_AUTHOR',
-    authors
+export const newRestaurantList = (restaurantList) => ({
+    type: 'NEW_RESTAURANT_LIST',
+    restaurantList
 });
 
-export const updateCurrentPage = (page) => ({
-    type: 'UPDATE_CURRENT_PAGE',
-    page
+export const newRestaurantReviews = (reviews) => ({
+    type: 'NEW_RESTAURANT_REVIEWS',
+    reviews
 });
 
 
@@ -23,15 +23,6 @@ export const reducers = (state = initialState1, action) => {
     console.log("Action is = ", action.type);
 
     switch (action.type) {
-        case 'ADD_AUTHOR':
-            console.log(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --")
-            console.log(" -- REDUCER -- ADD_AUTHOR | state: ", state)
-            console.log(" -- REDUCER -- ADD_AUTHOR | action", action)
-            return {
-                ...state,
-                authors: [...action.authors],
-                ready: true,
-            };
 
         case 'INIT_STATE':
             console.log(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --")
@@ -42,13 +33,23 @@ export const reducers = (state = initialState1, action) => {
                 socketSendFunc: action.socketSendFunc,
             };
 
-        case 'UPDATE_CURRENT_PAGE':
+        case 'NEW_RESTAURANT_LIST':
             console.log(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --")
-            console.log(" -- REDUCER -- UPDATE_CURRENT_PAGE | state: ", state)
-            console.log(" -- REDUCER -- UPDATE_CURRENT_PAGE | action", action)
+            console.log(" -- REDUCER -- NEW_RESTAURANT_LIST | state: ", state)
+            console.log(" -- REDUCER -- NEW_RESTAURANT_LIST | action", action)
             return {
                 ...state,
-                page: action.page,
+                restaurants: [...action.restaurantList],
+                ready: true,
+            };
+
+        case 'NEW_RESTAURANT_REVIEWS':
+            console.log(" -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- -- --")
+            console.log(" -- REDUCER -- NEW_RESTAURANT_REVIEWS | state: ", state)
+            console.log(" -- REDUCER -- NEW_RESTAURANT_REVIEWS | action", action)
+            return {
+                ...state,
+                reviews: [...action.reviews],
             };
 
         default:
@@ -60,9 +61,11 @@ export const reducers = (state = initialState1, action) => {
 // Initial State
 // Minimal representation of the data in the app
 const initialState1 = {
-    authors: [],
+    restaurants: null,
+    reviews: null,
     ready: false,
     socketSendFunc: null,
+    viewRestaurantId: null,
 };
 
 

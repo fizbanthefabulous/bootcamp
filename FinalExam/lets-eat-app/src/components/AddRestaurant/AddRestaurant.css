@@ -1,0 +1,31 @@
+.restaurant-form {
+    padding: 30px 10px 10px;
+    border: 1px solid black;
+    display: flex-inline;
+    flex-direction: column;
+    width: 35%;
+}
+
+.restaurant-form small{
+    color: blue;
+    height: 19px;
+    margin-top: 4px;
+    width: 100%;
+    display: block;
+}
+
+.restaurant-form-input {
+    width: 100%;
+}
+
+.restaurant-form-btns {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.restaurant-form-btn {
+    margin-right: 10px;
+    border: 1px solid black;
+}

@@ -1,0 +1,35 @@
+.review-form {
+    padding: 30px 10px 10px;
+    border: 1px solid black;
+    display: flex-inline;
+    flex-direction: column;
+    width: 35%;
+}
+
+.review-form small{
+    color: blue;
+    height: 19px;
+    margin-top: 4px;
+    width: 100%;
+    display: block;
+}
+
+.review-form select {
+    margin-bottom: 23px;
+}
+
+.review-form-input {
+    width: 100%;
+}
+
+.review-form-btns {
+    margin-top: 15px;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+}
+
+.review-form-btn {
+    margin-right: 10px;
+    border: 1px solid black;
+}
