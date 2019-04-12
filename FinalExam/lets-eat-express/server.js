@@ -11,6 +11,7 @@ app.use(cors());
 
 io.on('connection', function (socket) { //2
     console.log("CONNECTED TO CLIENT SOCKET")
+    let reviews = null;
 
     //Acknowledge client
     socket.emit('greeting', { msg: 'Greetings, from server Node, brought to you by Sockets! -Server' }); //3
@@ -60,6 +61,29 @@ io.on('connection', function (socket) { //2
             .catch((mockApiPutRestaurantError) => {
                 console.log("Edit Restaurant Put Error");
                 io.emit('restaurant-put-error', mockApiPutRestaurantError.data);
+            })
+    })
+
+
+    socket.on('delete-restaurant', (data) => {
+        axios.delete(`http://5cad073901a0b80014dcd22d.mockapi.io/restaurants/${data.id}`)
+            .then((mockApiRestaurantDeleteResponse) => {
+                sendUpdatedRestaurantListToConnectedUsers();
+                return axios.get('http://5cad073901a0b80014dcd22d.mockapi.io/reviews')
+            })
+            .then((mockApiGetReviewsResponse) => {
+                reviews = mockApiGetReviewsResponse.data.filter((review) => review.restaurantId === data.id);
+                console.log("reviews", reviews);
+
+                for(let i = 0; i < reviews.length; i+=1) {
+                    console.log('i = ',i)
+                    axios.delete(`http://5cad073901a0b80014dcd22d.mockapi.io/reviews/${reviews[i].id}`);
+                }
+                sendUpdatedReviewsListToConnectedUsers();
+            })
+            .catch((mockApiDeleteRestaurantError) => {
+                console.log("Delete Restaurant Error");
+                io.emit('restaurant-put-error', mockApiDeleteRestaurantError.data);
             })
     })
 

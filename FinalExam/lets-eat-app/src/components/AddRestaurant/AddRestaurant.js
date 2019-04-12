@@ -1,7 +1,7 @@
 import React from 'react';
 import './AddRestaurant.css';
 import { Link } from 'react-router-dom';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 class AddRestaurant extends React.Component {
     constructor(props) {
@@ -19,14 +19,14 @@ class AddRestaurant extends React.Component {
         let cuisineErr = true;
         let nameErr = true;
         let canSubmit = false;
-        
-        if(this.state.name.trim().length > 2)
+
+        if (this.state.name.trim().length > 2)
             nameErr = false;
 
-        if(this.state.cuisine.trim().length > 2)
+        if (this.state.cuisine.trim().length > 2)
             cuisineErr = false;
 
-        if(!nameErr && !cuisineErr)
+        if (!nameErr && !cuisineErr)
             canSubmit = true;
 
         this.setState({
@@ -47,8 +47,12 @@ class AddRestaurant extends React.Component {
 
         console.log('Adding a restaurant!');
 
-        this.props.send('add-restaurant', {name: this.state.name, cuisine: this.state.cuisine});
-        this.props.history.push('/restaurants');
+        let restaurantIdx = this.props.restaurantList.findIndex((restaurant) => restaurant.name.trim().toLowerCase() === this.state.name.trim().toLowerCase());
+
+        if (restaurantIdx === -1) {
+            this.props.send('add-restaurant', { name: this.state.name, cuisine: this.state.cuisine });
+            this.props.history.push('/restaurants');
+        }
     }
 
     render() {
@@ -60,7 +64,7 @@ class AddRestaurant extends React.Component {
                 <form className='restaurant-form' onSubmit={(event) => this.addRestaurant(event)}>
                     <label htmlFor='restaurant-name'>Restaurant name:</label>
                     <br />
-                    <input type='text' id='name' name='name' className='restaurant-form-input' onChange={(event) => this.handleChange(event)}/>
+                    <input type='text' id='name' name='name' className='restaurant-form-input' onChange={(event) => this.handleChange(event)} />
                     {this.state.nameErr ?
                         <small id="nameErr" className="form-text">Restaurant name must be at least three characters long.</small>
                         :
@@ -69,7 +73,7 @@ class AddRestaurant extends React.Component {
 
                     <label htmlFor='cuisine'>Cuisine:</label>
                     <br />
-                    <input type='text' id='cuisine' name='cuisine' className='restaurant-form-input' onChange={(event) => this.handleChange(event)}/>
+                    <input type='text' id='cuisine' name='cuisine' className='restaurant-form-input' onChange={(event) => this.handleChange(event)} />
                     {this.state.cuisineErr ?
                         <small id="cuisineErr" className="form-text">Cuisine must be at least three characters long.</small>
                         :
@@ -88,6 +92,7 @@ class AddRestaurant extends React.Component {
 
 const mapStateToProps = (state) => ({
     send: state.socketSendFunc,
+    restaurantList: state.restaurants,
 })
 
 const mapDispatchToProps = (dispatch) => ({
